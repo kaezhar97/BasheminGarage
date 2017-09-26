@@ -8,6 +8,13 @@
  *
  * @author Octavio
  */
-public class Car {
-    
+public class Car 
+{
+    private String licensePlate;
+    private int moveCount;
+ 
+    public Car(String licensePlate)
+    {
+        this.licensePlate=licensePlate;
+    }
 }

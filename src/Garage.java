@@ -10,5 +10,11 @@
  */
 public class Garage 
 {
+    private static final int MAX_SPACE=10;
+    private Car[] cars;
     
+    public Garage()
+    {
+        cars=new Car[MAX_SPACE];
+    }
 }
