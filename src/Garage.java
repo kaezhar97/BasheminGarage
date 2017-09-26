@@ -15,26 +15,43 @@ public class Garage
     
     public Garage()
     {
-        cars=new Car[MAX_SPACE];
-        
+        cars=new Car[MAX_SPACE]; 
     }
     
     public String arrive(Car hiCar)
-    {      
+    {     
+        boolean emptyPositionFound=false;
+        for(int i=MAX_SPACE-1;i>0&&emptyPositionFound;i--)
+        {
+           if (isEmptyAtPosition(i))
+           {
+               cars[i]=hiCar;
+               emptyPositionFound=true;
+           }
+        }
         
         cars[MAX_SPACE-1]=hiCar;
-        return "";
+        return    "JAV001 has arrived at position 10"
+                + "The garage now has 9 available spaces";
     }
     
     public String depart(Car byeCar)
-    {
-        
-        return "";
+    {      
+        return    "JAV001 has departed from position 10"
+                + "The garage now has 10 available spaces";
     }
     
-    public boolean isEmpty(int index)
+    public boolean isEmptyAtPosition(int index)
     {
-        return true;
+        if (cars[index]==null)
+        {
+            return true;
+        }
+        
+        else
+        {
+            return false;
+        }
     }
     
     
