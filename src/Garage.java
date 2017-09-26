@@ -17,4 +17,14 @@ public class Garage
     {
         cars=new Car[MAX_SPACE];
     }
+    
+    public String arrive()
+    {
+        return "";
+    }
+    
+    public String depart()
+    {
+        return "";
+    }
 }
