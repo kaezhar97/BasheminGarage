@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.util.Arrays ;
 /**
  *
  * @author Octavio
@@ -16,15 +16,26 @@ public class Garage
     public Garage()
     {
         cars=new Car[MAX_SPACE];
+        
     }
     
-    public String arrive()
-    {
+    public String arrive(Car hiCar)
+    {      
+        
+        cars[MAX_SPACE-1]=hiCar;
         return "";
     }
     
-    public String depart()
+    public String depart(Car byeCar)
     {
+        
         return "";
     }
+    
+    public boolean isEmpty(int index)
+    {
+        return true;
+    }
+    
+    
 }
