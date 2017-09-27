@@ -18,6 +18,11 @@ public class Car
         this.licensePlate=licensePlate;
     }
     
+    public String getLicensePlate()
+    {
+        return licensePlate;
+    }
+    
     public void increaseMoveCount()
     {
         moveCount++;
