@@ -20,7 +20,7 @@ public class BasheminTest
         String licensePlate="";
         String action="";
         Scanner fileIn=new Scanner(new File("garage.txt"));
-        
+        Garage garage = new Garage();
         
         do
         {
@@ -28,7 +28,7 @@ public class BasheminTest
                 action=fileIn.next();
                 
                 Car car = new Car(licensePlate);
-                Garage garage = new Garage();
+                
                 
                 if (action.equals("ARRIVE"))
                 {
