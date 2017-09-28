@@ -24,31 +24,39 @@ public class Garage
 
     public String arrive(Car hiCar)
     {
+        int spaceWhereCarWasParked=0;
         if (garageCarCount == MAX_SPACE)
         {
             return "Sorry, the garage is full at this moment. Try again later";
         }
-        boolean emptyPositionFound = false;
-        for (int i = 0; i < MAX_SPACE && emptyPositionFound; i++)
+        boolean emptyPositionNotFound = true;
+        for (int i = 0; i < MAX_SPACE && emptyPositionNotFound; i++)
         {
             if (isEmptyAtPosition(i))
             {
                 cars[i] = hiCar;
                 garageCarCount++;
-                emptyPositionFound = true;
+                emptyPositionNotFound = false;
+                spaceWhereCarWasParked=i;
             }
         }
 
-        return "JAV001 has arrived at position 10"
-                + "The garage now has 9 available spaces";
+        return hiCar.getLicensePlate()+" has arrived at parking space number "+spaceWhereCarWasParked;
     }
 
     public String depart(Car byeCar)
     {
         boolean carNotFound = true;
         carsBeingMoved = new Car[MAX_SPACE];
-        for (int i = 0; i < MAX_SPACE && carNotFound; i++)
+        boolean garageIsEmpty=cars[0]==null;
+        
+        if (garageIsEmpty)
         {
+            return "The garage is empty";
+        }
+        
+        for (int i = 0; i < MAX_SPACE && carNotFound; i++)
+        {  
             if (byeCar.getLicensePlate() == cars[i].getLicensePlate())
             {
                 carNotFound = false;
@@ -64,6 +72,7 @@ public class Garage
                     }
                 }
                 garageCarCount--;
+                cleanUpGarbage();
                 return "The car " + byeCar.getLicensePlate() + " has departed. Have a nice day!";
             }
         }
@@ -98,6 +107,14 @@ public class Garage
         for (int m = 0; m < i; m++)
         {
             cars[m] = carsBeingMoved[m];
+        }
+    }
+    
+    public void cleanUpGarbage()
+    {
+        for (int n=garageCarCount;n<MAX_SPACE;n++)
+        {
+            cars[n]=null;
         }
     }
 }
