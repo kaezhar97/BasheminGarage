@@ -1,0 +1,31 @@
+JAV001 has arrived at parking space number 0
+JAV002 has arrived at parking space number 1
+JAV003 has arrived at parking space number 2
+JAV004 has arrived at parking space number 3
+JAV005 has arrived at parking space number 4
+The car JAV001 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV004 has departed. It was moved 0 times during its stay. Have a nice day!
+JAV006 has arrived at parking space number 3
+JAV007 has arrived at parking space number 4
+JAV008 has arrived at parking space number 5
+JAV009 has arrived at parking space number 6
+JAV010 has arrived at parking space number 7
+JAV011 has arrived at parking space number 8
+JAV012 has arrived at parking space number 9
+Sorry, the garage is full at this moment. Try again later
+Sorry, the garage is full at this moment. Try again later
+The car JAV006 has departed. It was moved 0 times during its stay. Have a nice day!
+Sorry, that car is not on this garage
+Sorry, that car is not on this garage
+The car JAV005 has departed. It was moved 0 times during its stay. Have a nice day!
+JAV015 has arrived at parking space number 8
+The car JAV010 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV002 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV015 has departed. It was moved 0 times during its stay. Have a nice day!
+Sorry, that car is not on this garage
+The car JAV009 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV003 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV008 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV007 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV012 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV011 has departed. It was moved 0 times during its stay. Have a nice day!

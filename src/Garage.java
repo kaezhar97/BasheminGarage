@@ -82,7 +82,7 @@ public class Garage
         for (int i = 0; i < MAX_SPACE && carNotFound; i++)
         {  
             System.out.println("[DEBUGGING]: We are now inside the loop that will check if the departing car is in the garage at all");
-            if (byeCar.getLicensePlate().equals(cars[i].getLicensePlate()))
+            if ((cars[i]!=null) && (byeCar.getLicensePlate().equals(cars[i].getLicensePlate())))
             {
                 carNotFound = false;
                 System.out.println("[DEBUGGING]: Initializing carNotFound to "+carNotFound);
@@ -103,6 +103,7 @@ public class Garage
                         cars[l] = cars[l + 1];
                         
                     }
+                    System.out.println("[DEBUGGING]: The present state of the cars garage: "+this.toString());
                 }
                 System.out.print("[DEBUGGING]: The number of cars in the garage has been decreased from "+garageCarCount);
                 garageCarCount--;
@@ -111,8 +112,8 @@ public class Garage
                 cleanUpGarbage();
                 System.out.println("[DEBUGGING]: The present state of the cars garage: "+this.toString());
                 
-                return "The car " + byeCar.getLicensePlate() + " has departed. It was been moved" + 
-                        byeCar.getMoveCount()+" times "+" during its stay.Have a nice day!";
+                return "The car " + byeCar.getLicensePlate() + " has departed. It was moved " + 
+                        byeCar.getMoveCount()+" times "+"during its stay. Have a nice day!";
             }
         }
         System.out.println("[DEBUGGING]: It appears the car is not in this garage");
@@ -122,14 +123,16 @@ public class Garage
     public boolean isEmptyAtPosition(int index)
     {
         System.out.println("[DEBUGGING]: We are inside the method that checks if a position is empty or not");
-        System.out.print("[DEBUGGING]: The value of the car at position "+index+" is "+cars[index].getLicensePlate()+". ");
+        
         if (cars[index] == null)
         {
+            System.out.print("[DEBUGGING]: The value of the car at position is null");
             System.out.println("Therefore, the garage is empty at this position");
             return true;
         }
         else
         {
+            System.out.print("[DEBUGGING]: The value of the car at position "+index+" is "+cars[index].getLicensePlate()+". ");
             System.out.println("Therefore, the garage is occupied at this position");
             return false;
         }
