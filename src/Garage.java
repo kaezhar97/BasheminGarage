@@ -1,227 +1,281 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+File: Garage.java
+Purpose:
+    This class simulates a real-world one lane garage. 
+*/
+
 import java.util.Arrays;
 
 /**
- *
+ * The Bashemin Parking Garage contains a single lane that can hold up to ten cars.  Arriving cars enter the garage at
+ * the rear and are parked in the empty space nearest to the front. Departing cars exit only from the front.  
+ * If a customer needs to pick up a car that is not nearest to the exit, then all cars blocking its path are moved out temporarily, 
+ * the customer's car is driven out, and the other cars are restored in the order they were in originally.  
+ * Whenever a car departs, all cars behind it in the garage are moved up one space.
+ * 
  * @author Octavio
  */
 public class Garage
 {
 
-    private static final int MAX_SPACE = 10;
-    private Car[] cars;
-    private Car[] carsBeingMoved;
-    private int garageCarCount = 0;
+    private static final int MAX_SPACE = 10; //Maximum number of cars that can be parked in the garage
 
-    
+    private Car[] cars; //The list of cars in the garage
+ 
+    private Car[] carsBeingMoved; //Temporarily stores the cars that need to be moved out of the garage to allow another car to leave
+
+    private int garageCarCount = 0; //Keeps track of the number of cars in the garage at all times
+
+    /**
+     * Creates a new garage with MAX_SPACE number of empty spaces inside
+     */
     public Garage()
     {
         cars = new Car[MAX_SPACE];
-        System.out.println("[DEBUGGING]: Initializing cars to an array of size "+ MAX_SPACE);
-    }
 
+    }
+    
+    /**
+     * Parks a car inside the garage if there are empty spaces available
+     * 
+     * @param hiCar the car that needs to be parked
+     * @return the status of the operation
+     */
     public String arrive(Car hiCar)
     {
-        System.out.println("[DEBUGGING]: We are now inside the arrive method of the Garage class");
-        int spaceWhereCarWasParked=0;
-        System.out.println("[DEBUGGING]: Initializing variable spaceWHereCasWasParked to "+spaceWhereCarWasParked);
-        
-        System.out.println("[DEBUGGING]: Checking if the garage is full");
-        
+
+        int spaceWhereCarWasParked = 0; //Keeps track of the where the arriving car has parked
+
+        /*
+            Checks if the garage is full
+        */
         if (garageCarCount == MAX_SPACE)
         {
-            System.out.println("[DEBUGGING]: The garage seems to be full");
+
             return "Sorry, the garage is full at this moment. Try again later";
         }
-        boolean emptyPositionNotFound = true;
-        System.out.println("[DEBUGGING]: Initializing emptyPositionNotFound to "+ emptyPositionNotFound);
+        boolean emptyPositionNotFound = true; 
+
+        /*
+            Checks each space individually to find one that is empty and closest to the entrance
+        */
         for (int i = 0; i < MAX_SPACE && emptyPositionNotFound; i++)
         {
-            System.out.println("[DEBUGGING]: We are inside the for loop that will look for an available parking spot in the garage");
-            System.out.println("[DEBUGGING]: The loop has has run "+(i+1)+" times so far");
-            System.out.println("[DEBUGGING]: Checking if there are no cars in position "+i);
+
             if (isEmptyAtPosition(i))
             {
-                System.out.println("[DEBUGGING]: There are no cars in position" +i+" therefore we will park our car here");
-                System.out.println("[DEBUGGING]: Placing "+hiCar.getLicensePlate()+" in position "+i+" of the cars array");
-                cars[i] = hiCar;
-                garageCarCount++;
-                System.out.println("[DEBUGGING]: Increasing the garageCarCount by one. The number of cars in the garage is "+garageCarCount);
-                System.out.println("[DEBUGGING]: Setting emptyPositionNotFound to false because an empty position was found for the car");
-                emptyPositionNotFound = false;
-                System.out.println("[DEBUGGING]: Storing the space where the car was parked. The car was parked in position "+i+" of the array cars");
-                spaceWhereCarWasParked=i;
-                System.out.println("[DEBUGGING]: The present state of the cars garage: "+this.toString());
+
+                cars[i] = hiCar; //Stores the arriving car in the empty position
+                garageCarCount++; //Increases the number of cars in the garage
+
+                emptyPositionNotFound = false; //Car has been found
+
+                spaceWhereCarWasParked = i; //Tracks where the car was parked
+
             }
         }
 
-        return hiCar.getLicensePlate()+" has arrived at parking space number "+spaceWhereCarWasParked;
+        return hiCar.getLicensePlate() + " has arrived at parking space number " + spaceWhereCarWasParked;
     }
 
+    /**
+     * Moves a car out of the garage. If it is right next to the entrance, then it can leave easily. Otherwise, all the other cars in front of it 
+     * need to be moved out temporarily to allow it to leave.
+     * 
+     * @param byeCar the car that is departing
+     * @return the status of the operation
+     */
     public String depart(Car byeCar)
     {
-        System.out.println("[DEBUGGING]: We are now inside the depart method of the Garage class");
+
         boolean carNotFound = true;
-        System.out.println("[DEBUGGING]: Initializing carNotFound to "+carNotFound);
-        carsBeingMoved = new Car[MAX_SPACE];
-        System.out.println("[DEBUGGING]: Creating an empty array of 10 spaces to store the cars that need to be moved");
-        boolean garageIsEmpty=cars[0]==null;
-        System.out.println("[DEBUGGING]: Initializing garage is empty to whether or not the garage is empty. The value is "+garageIsEmpty);
-        
+
+        carsBeingMoved = new Car[MAX_SPACE]; //Creates a temporary space for the cars that need to be moved out of the garage to allow another car to leave
+
+        boolean garageIsEmpty = cars[0] == null; //Checks if the garage is empty. The garage should be empty if there are no cars at the very front
+
         if (garageIsEmpty)
         {
-            System.out.println("[DEBUGGING]: The garage appears to be empty");
+
             return "The garage is empty";
         }
-        
-        
+
+        /*
+            Looks for the departing car inside the garage by checking each parking space individually
+        */
         for (int i = 0; i < MAX_SPACE && carNotFound; i++)
-        {  
-            System.out.println("[DEBUGGING]: We are now inside the loop that will check if the departing car is in the garage at all");
-            if ((cars[i]!=null) && (byeCar.getLicensePlate().equals(cars[i].getLicensePlate())))
+        {
+
+            /*
+                Checks if the current car is the car that needs to depart
+            */
+            if ((cars[i] != null) && (byeCar.getLicensePlate().equals(cars[i].getLicensePlate())))
             {
-                byeCar=cars[i];
+                byeCar = cars[i]; 
                 carNotFound = false;
-                System.out.println("[DEBUGGING]: Initializing carNotFound to "+carNotFound);
-                System.out.println("[DEBUGGING]: Checking if i is not equal to zero. If i is 0 then that means the car can just leave "
-                        + "the garage without problems. However, if i is not 0 then we need to move out the cars before it");
+
+                /*
+                    Checks if the departing car is next to the entrance
+                */
                 if (i != 0)
                 {
-                    System.out.println("[DEBUGGING]: It appears i is not 0. Therefore, move all cars before position "+i);
+
                     moveOutAllCarsBeforeIndex(i);
-                }
+                } 
+                /*
+                    If the car is right next to the entrance then let it leave and move all other cars up one space so that they are all 
+                closer to the entrance
+                */
                 else
                 {
-                    System.out.println("[DEBUGGING]: i is 0. Car can leave the garage. All other cars are moved up closer to the entrance");
+
                     for (int l = 0; l < garageCarCount; l++)
                     {
-                        System.out.println("[DEBUGGING]: We are inside the loop that moves all cars closer to the entrance");
-                        System.out.println("[DEBUGGING]: The way this happens is that the car in position "+(l+1)+" is moved up to position "+l);
+
                         cars[l] = cars[l + 1];
-                        
+
                     }
-                    System.out.println("[DEBUGGING]: The present state of the cars garage: "+this.toString());
+
                 }
-                System.out.print("[DEBUGGING]: The number of cars in the garage has been decreased from "+garageCarCount);
-                garageCarCount--;
-                System.out.println(" to "+garageCarCount);
-                System.out.println("[DEBUGGING]: Cleaning out the garbage values that don't matter");
-                cleanUpGarbage();
-                System.out.println("[DEBUGGING]: The present state of the cars garage: "+this.toString());
-                
-                return "The car " + byeCar.getLicensePlate() + " has departed. It was moved " + 
-                        byeCar.getMoveCount()+" times "+"during its stay. Have a nice day!";
+
+                garageCarCount--; //Reduce the number of cars in the garage
+
+                cleanUpGarbage(); //Make sure the spaces where there are no cars parked are truly empty
+
+                return "The car " + byeCar.getLicensePlate() + " has departed. It was moved "
+                        + byeCar.getMoveCount() + " times " + "during its stay. Have a nice day!";
             }
         }
-        System.out.println("[DEBUGGING]: It appears the car is not in this garage");
+
         return "Sorry, that car is not on this garage";
     }
 
+    /**
+     * Checks if the current parking space is empty
+     * 
+     * @param index the parking space that is being checked
+     * @return whether or not the parking space is empty as true for empty and false for not empty
+     */
     public boolean isEmptyAtPosition(int index)
     {
-        System.out.println("[DEBUGGING]: We are inside the method that checks if a position is empty or not");
-        
+
+        /*
+            If the position being checked has a value of null then we know it to be empty
+        */
         if (cars[index] == null)
         {
-            System.out.print("[DEBUGGING]: The value of the car at position is null");
-            System.out.println("Therefore, the garage is empty at this position");
+
             return true;
-        }
-        else
+        } else
         {
-            System.out.print("[DEBUGGING]: The value of the car at position "+index+" is "+cars[index].getLicensePlate()+". ");
-            System.out.println("Therefore, the garage is occupied at this position");
+
             return false;
         }
     }
 
+    /**
+     * Moves all cars before a specified parking space number
+     * 
+     * @param i the parking space number. All cars before it must be moved out temporarily
+     */
     public void moveOutAllCarsBeforeIndex(int i)
     {
-        System.out.println("[DEBUGGING]: We are now inside the method that moves out all cars before the index of the departing car");
+
+        /*
+            Puts all cars from the garage that are parked before the specified parking space number into a temporary space to allow the departing car
+        to leave
+        */
         for (int j = 0; j < i; j++)
         {
-            System.out.println("[DEBUGGING]: We are inside the loop that will put every car before the index of the departing car inside the"
-                    + " cars being moved array");
+
             carsBeingMoved[j] = cars[j];
-            System.out.println("[DEBUGGING]: The car "+cars[j].getLicensePlate()+" is being put in position "+j+" of the array"
-                    + " carsBeingMoved. The car inside carsBeingMoved[j] is thus "+carsBeingMoved[j].getLicensePlate());
+
             cars[j].increaseMoveCount();
-            System.out.println("[DEBUGGING]: The move count of "+cars[j].getLicensePlate()+" is now"+cars[j].getMoveCount());
+
         }
 
+        /*
+            All cars after the specified parking space are moved up one space closer to the entrance. That way the parking space
+        that was being occupied by the departing car is not being occupied by the car that was before it
+        
+        */
         for (int k = i; k < garageCarCount; k++)
         {
-            System.out.println("[DEBUGGING]: We are inside the loop that will move all cars in the cars array up to the position of the"
-                    + "departing car which will replace the departing car itself");
-            System.out.println("[DEBUGGING]: Checking if the length of the cars array is equal to position "+(k+1)+", in which case"
-                    + " we cannot move up a nonexistent car");
-            if ( cars.length!=(k+1) )
+
+            
+            if (cars.length != (k + 1)) // This condition checks we are not trying to move up a car that is beyond the MAX_SPACE of the garage
             {
-                System.out.println("[DEBUGGING]: All good. We can move up the cars");
-                cars[k] = cars[k + 1];
+
+                cars[k] = cars[k + 1]; //Each car is moved up once space closer to the entrance
             }
-            System.out.println("[DEBUGGING]: This is done by grabbing the car at position "+(k+1)+" and putting it in position "+k);
+
         }
 
+        /*
+            Puts the cars that were moved out temporarily back in their parking spots
+        */
         for (int m = 0; m < i; m++)
         {
-            System.out.println("[DEBUGGING]: We are now inside the loop that will put back the cars that we moved out");
+
             cars[m] = carsBeingMoved[m];
-            
+
         }
     }
-    
+
+    /**
+     * Cleans up the parking spaces that are not being occupied by any cars by making them empty
+     */
     public void cleanUpGarbage()
     {
-        System.out.println("[DEBUGGING]: We are now inside of the cleanUpGarbage method of the Garage class");
-        for (int n=garageCarCount;n<MAX_SPACE;n++)
+        
+        /*
+            All parking spaces starting right after the last car that was parked and ending at the end of the garage are cleaned up
+        */
+        for (int n = garageCarCount; n < MAX_SPACE; n++)
         {
-            System.out.println("[DEBUGGING]: We are inside the loop that will make every value from the garageCarCount until the max space of the"
-                    + " garage equal to null. This has happened "+(n+1)+" times thus far");
-            cars[n]=null;
+            cars[n] = null;
         }
     }
-    
+
+    /**
+     * Shows a literal representation of the garage. Occupied spaces are illustrated by showing the car's license plate and empty spaces are shown as "null"
+     * 
+     * @return the current state of the garage
+     */
     public String toString()
     {
-        String garageString="[";
-        
-        for (int i=0;i<cars.length;i++)
+        String garageString = "[";
+
+        for (int i = 0; i < cars.length; i++)
         {
-            if (cars[i]!=null)
+            if (cars[i] != null)
             {
-                
-                if(i==(cars.length-1))
+
+                if (i == (cars.length - 1))
                 {
-                    garageString+=cars[i].getLicensePlate(); 
+                    garageString += cars[i].getLicensePlate();
+                } else
+                {
+                    garageString += cars[i].getLicensePlate() + ", ";
                 }
-                else
-                {
-                    garageString+=cars[i].getLicensePlate()+", ";
-                }          
-                
-            }
-            else
+
+            } else
             {
-                if(i==(cars.length-1))
+                if (i == (cars.length - 1))
                 {
-                   
-                    garageString+="null";
+
+                    garageString += "null";
+                } else
+                {
+                    garageString += "null, ";
                 }
-                else
-                {
-                    garageString+="null, ";
-                }   
-                
+
             }
         }
-        
-        garageString+="]";
-        
+
+        garageString += "]";
+
         return garageString;
     }
+
 }
