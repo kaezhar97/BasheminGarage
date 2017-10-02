@@ -23,13 +23,55 @@ public class BasheminTest
         Scanner fileIn = new Scanner(new File("garage.txt"));
         PrintWriter fileOut = new PrintWriter("output.txt") ;
         Garage garage = new Garage();
-
+        Car car;
+       
+        /*
+        int i=0;
+        int numberOfCars=0;
+        int numberOfInstructions=0;
+        //Check how may cars and instructions there are in the file
+        do
+        {
+            i++;
+            numberOfCars=i/2;
+            numberOfInstructions=numberOfCars;
+            fileIn.next();
+        }while(fileIn.hasNext());
+        
+        Car[] allCarsInFile= new Car[numberOfCars];
+        String[] licensePlates = new String [numberOfCars];
+        String[] instructions = new String [numberOfInstructions];
+        fileIn = new Scanner(new File("garage.txt"));
+        
+        int m=0;
+        do
+        {
+            licensePlates[m]=fileIn.next();
+            instructions[m]=fileIn.next();
+            allCarsInFile[m]=new Car(licensePlates[m]);
+            m++;
+        }while(fileIn.hasNext());
+        
+        for (int n=0;n<allCarsInFile.length;n++)
+        {
+            if (instructions[n].equals("ARRIVE"))
+            {
+                fileOut.println(garage.arrive(allCarsInFile[n]));
+            }
+            else
+            {
+                fileOut.println(garage.depart(allCarsInFile[n]));
+            }
+        }
+        */
+        
+        
         do
         {
             licensePlate = fileIn.next();
             action = fileIn.next();
 
-            Car car = new Car(licensePlate);
+            car = new Car(licensePlate);
 
             if (action.equals("ARRIVE"))
             {

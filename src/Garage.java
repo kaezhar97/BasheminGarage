@@ -84,6 +84,7 @@ public class Garage
             System.out.println("[DEBUGGING]: We are now inside the loop that will check if the departing car is in the garage at all");
             if ((cars[i]!=null) && (byeCar.getLicensePlate().equals(cars[i].getLicensePlate())))
             {
+                byeCar=cars[i];
                 carNotFound = false;
                 System.out.println("[DEBUGGING]: Initializing carNotFound to "+carNotFound);
                 System.out.println("[DEBUGGING]: Checking if i is not equal to zero. If i is 0 then that means the car can just leave "
@@ -149,6 +150,7 @@ public class Garage
             System.out.println("[DEBUGGING]: The car "+cars[j].getLicensePlate()+" is being put in position "+j+" of the array"
                     + " carsBeingMoved. The car inside carsBeingMoved[j] is thus "+carsBeingMoved[j].getLicensePlate());
             cars[j].increaseMoveCount();
+            System.out.println("[DEBUGGING]: The move count of "+cars[j].getLicensePlate()+" is now"+cars[j].getMoveCount());
         }
 
         for (int k = i; k < garageCarCount; k++)

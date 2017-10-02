@@ -20,16 +20,17 @@ public class Car
     
     public String getLicensePlate()
     {
-        return licensePlate;
+        return this.licensePlate;
     }
     
     public void increaseMoveCount()
     {
-        moveCount++;
+        this.moveCount++;
     }
     
     public int getMoveCount()
     {
-        return moveCount;
+        return this.moveCount;
     }
+ 
 }

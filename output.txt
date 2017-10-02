@@ -17,15 +17,15 @@ Sorry, the garage is full at this moment. Try again later
 The car JAV006 has departed. It was moved 0 times during its stay. Have a nice day!
 Sorry, that car is not on this garage
 Sorry, that car is not on this garage
-The car JAV005 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV005 has departed. It was moved 1 times during its stay. Have a nice day!
 JAV015 has arrived at parking space number 8
 The car JAV010 has departed. It was moved 0 times during its stay. Have a nice day!
-The car JAV002 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV002 has departed. It was moved 4 times during its stay. Have a nice day!
 The car JAV015 has departed. It was moved 0 times during its stay. Have a nice day!
 Sorry, that car is not on this garage
-The car JAV009 has departed. It was moved 0 times during its stay. Have a nice day!
-The car JAV003 has departed. It was moved 0 times during its stay. Have a nice day!
-The car JAV008 has departed. It was moved 0 times during its stay. Have a nice day!
-The car JAV007 has departed. It was moved 0 times during its stay. Have a nice day!
-The car JAV012 has departed. It was moved 0 times during its stay. Have a nice day!
-The car JAV011 has departed. It was moved 0 times during its stay. Have a nice day!
+The car JAV009 has departed. It was moved 2 times during its stay. Have a nice day!
+The car JAV003 has departed. It was moved 6 times during its stay. Have a nice day!
+The car JAV008 has departed. It was moved 3 times during its stay. Have a nice day!
+The car JAV007 has departed. It was moved 4 times during its stay. Have a nice day!
+The car JAV012 has departed. It was moved 1 times during its stay. Have a nice day!
+The car JAV011 has departed. It was moved 2 times during its stay. Have a nice day!
