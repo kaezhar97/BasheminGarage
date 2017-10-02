@@ -1,3 +1,6 @@
+
+package BasheminClasses;
+
 /*
 File: Garage.java
 Purpose:
